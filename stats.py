@@ -47,6 +47,18 @@ def top_5_teams(df):
     return teams
 
 
+def Goal_diff_count(df):
+    
+    teams = []
+    for ind in df.index:
+        teams.append( (df['Team'][ind], int(df['GoalsAgainst'][ind]) - int(df['GoalsFor'][ind])) )
+
+    max_diff_team = max(teams, key = lambda x: x[1])
+    min_diff_team = min(teams, key = lambda x: x[1])
+
+    return max_diff_team[0], min_diff_team[0]
+
+        
 if __name__ == "__main__":
     
     # Question 1
@@ -60,3 +72,7 @@ if __name__ == "__main__":
 
     # Question 3
     print(top_5_teams(nd))
+
+    # Question 4
+    print(Goal_diff_count(nd))
+    
