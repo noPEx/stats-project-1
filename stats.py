@@ -59,6 +59,20 @@ def Goal_diff_count(df):
     return max_diff_team[0], min_diff_team[0]
 
         
+def add_winning_percent_column(df):
+
+    percent_list = []
+    for ind in df.index:
+        total_matches = int(df['GamesPlayed'][ind]) + int(df['GamesWon'][ind]) + int(df['GamesDrawn'][ind])
+        if total_matches <= 0.0:
+            percent_list.append(0)
+            continue
+        win_percent = (int(df['GamesWon'][ind])*1.0) / total_matches
+        percent_list.append(win_percent)
+
+    df["Winning Percent"] = percent_list 
+    
+
 if __name__ == "__main__":
     
     # Question 1
@@ -75,4 +89,8 @@ if __name__ == "__main__":
 
     # Question 4
     print(Goal_diff_count(nd))
+
+    # Question 5
+    add_winning_percent_column(nd)
+    print(nd)
     
