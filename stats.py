@@ -34,6 +34,19 @@ def filter_on_start(df):
  
     return teams
 
+
+def top_5_teams(df):
+    df[ ["Points"] ] = df[ ["Points"] ].apply(pd.to_numeric)
+    
+    top5 = df.nlargest(5, "Points")
+
+    teams = []
+    for ind in top5.index:
+        teams.append( top5['Team'][ind] )
+
+    return teams
+
+
 if __name__ == "__main__":
     
     # Question 1
@@ -42,5 +55,8 @@ if __name__ == "__main__":
     print(nd)
 
 
-    # Question 1
+    # Question 2
     print(filter_on_start(df))
+
+    # Question 3
+    print(top_5_teams(nd))
