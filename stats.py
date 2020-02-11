@@ -72,6 +72,15 @@ def add_winning_percent_column(df):
 
     df["Winning Percent"] = percent_list 
     
+def group_teams_by_best_position(df):
+    
+    position_points = {}
+
+    for ind in df.index:
+        position_points[df['BestPosition'][ind]] = int( position_points.get(df['BestPosition'][ind], 0) ) + int(df['Points'][ind])
+
+    return position_points
+        
 
 if __name__ == "__main__":
     
@@ -93,4 +102,7 @@ if __name__ == "__main__":
     # Question 5
     add_winning_percent_column(nd)
     print(nd)
+
+    # Question 6
+    print(group_teams_by_best_position(nd))
     
